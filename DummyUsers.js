@@ -3,6 +3,8 @@ var d=x.getDate();
 var m=x.getMonth()+1;
 var y=x.getFullYear();
 var d1=11,m1=11,y1=2019;
+//x=x+1;
+console.log(x);
 
 //to find the number of days between the date of upload and the date on which user opened the blog
 const monthDays = [31, 28, 31, 30, 31, 30,31, 31, 30, 31, 30, 31];
