@@ -1,14 +1,39 @@
-
+const db=require('./util/database');
 
 var x=new Date();
-var d=x.getDate();
-var m=x.getMonth()+1;
-var y=x.getFullYear();
-var d1=11,m1=11,y1=2019;
-//x=x+1;
-console.log(x);
+var curDay=x.getDate();//current date
+var curMonth=x.getMonth()+1;//current month
+var curYear=x.getFullYear();//current year
+var curHr=x.getHours();
+var curMm=x.getMinutes();
 
-//to find the number of days between the date of upload and the date on which user opened the blog
+
+
+var d,m,y,h,m,valueY,valueX,newy;
+db.query('SELECT * from data where id=1',(error,results)=>
+{
+if(error)
+console.log(error);
+else
+{
+      d=results[0].day;//day the dummy views last updated
+      m=results[0].month;//month the dummy views last updated
+      y=results[0].year;//year the dummy views last updated
+      h=results[0].hour;//hour
+      m=results[0].month;//minute
+      valueY=results[0].y;//value of y
+      valueX=results[0].x;
+      console.log(d);
+      
+}
+});
+
+var sum=0;
+
+console.log(d);
+if(d!=curDay && curDay>d)
+{
+    console.log('shweta');
 const monthDays = [31, 28, 31, 30, 31, 30,31, 31, 30, 31, 30, 31];
 
 function countLeapYears(d,m,y)
@@ -27,57 +52,36 @@ var n1 = y*365 + d;
     var n2 = y1*365 + d1; 
     for (var i=0; i<m1 - 1; i++) 
         n2 =n2+ monthDays[i]; 
-    n2 =n2+ countLeapYears(d1,m1,y1); 
-  
-    
+    n2 =n2+ countLeapYears(curDay,curMonth,curYear); 
     ans=(n2 - n1-1); 
+    if(ans<0)
+    ans=0;
 
+   
     //to find the number of minutes on te day of upload
-    var hu=3,mu=23,su=45;
-    var calminb=hu*60+mu;
-    console.log(calminb);
+    var MinBefore=1440-h*60-m;
+    console.log(MinBefore);
+    sum=sum+MinBefore*valX*valY;
 
     //to find the number of minutes on that particular day
-    var h=x.getHours();
-    var m=x.getMinutes();
-    var s=x.getSeconds();
-    var calmina=h*60+m;
-    console.log(calmina);
-
-    var sum=0;
+   
+    var MinAfter=curHr*60+curMm;
+     newy=Math.floor(Math.random() * 100)+1;
+    sum=sum+MinAfter*x*newy;
+   
     for(var i=2;i<ans;i++)
     {
     var y=Math.floor(Math.random() * 100)+1;
     sum=sum+i*x*y;
     }
-
-
-    <!-- <!DOCTYPE html>
-<html lang="en">
-<head>
-        <!-- <script> -->
-                <!-- function req()
-{
-    var xmlHttp = new XMLHttpRequest();
-   // console.log('shweta');
-    xmlHttp.open( "GET", "localhost:3000/x", function(err,res){
-            console.log("ok");
-console.log(err,res);} ); // false for synchronous request
-    document.write(xmlHttp.responseText);
 }
-</script> -->
-<!-- <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+else
+{ 
+    var diff=curHr*60+curMm-h*60-m;
+    sum=sum+diff*x*y;
+}
+
+//db.query('UPDATE data SET y=newy,day=curDay,month=curMonth,year=curYear,hour=curHr,minute=curMm where id=1');
 
 
-</head>
-<body>
-         <%for(let product of prods){%>
-                <iframe src="<%=product.video%>" width="640" height="480"></iframe>
-             
-         <% } %>
-
-
-        
-	</body>
-</html> --> 
+console.log(sum);

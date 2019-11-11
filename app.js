@@ -16,22 +16,16 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 //app.use(formRoutes);
 app.get('/',(req, res) =>{
-    //   Product.fetchAll()
-    //     .then(products => {
-    //       res.render('form', {
-    //         prods: products,
-    //       });
-    //     })
-    //     .catch(err => console.log(err));
-    // };
+    // data.fetchAll()
+    // .then(data=>{
     res.render('form');
 });
 
-app.get('/p',(req,res)=>{
+app.get('/p',function(req,res){
   db.query("UPDATE view SET VIEWS=VIEWS+1 WHERE id=1");
   //console.log();
-})
-
-
+});
 
 app.listen(3000);
+
+
