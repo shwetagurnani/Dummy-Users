@@ -1,3 +1,5 @@
+
+
 var x=new Date();
 var d=x.getDate();
 var m=x.getMonth()+1;
@@ -48,3 +50,34 @@ var n1 = y*365 + d;
     var y=Math.floor(Math.random() * 100)+1;
     sum=sum+i*x*y;
     }
+
+
+    <!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+        <!-- <script> -->
+                <!-- function req()
+{
+    var xmlHttp = new XMLHttpRequest();
+   // console.log('shweta');
+    xmlHttp.open( "GET", "localhost:3000/x", function(err,res){
+            console.log("ok");
+console.log(err,res);} ); // false for synchronous request
+    document.write(xmlHttp.responseText);
+}
+</script> -->
+<!-- <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+</head>
+<body>
+         <%for(let product of prods){%>
+                <iframe src="<%=product.video%>" width="640" height="480"></iframe>
+             
+         <% } %>
+
+
+        
+	</body>
+</html> --> 

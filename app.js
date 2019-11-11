@@ -15,20 +15,22 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'public')));
 
 //app.use(formRoutes);
-
-app.get('/',(req,res,next)=>{
-   
-       db.query('SELECT * FROM data ', function(error, results)
-       {
-           if(error)
-           console.log(error);
-           res.render('form',{
-               prods:results
-           });
-           console.log(results[1].video)
-     
-    });
+app.get('/',(req, res) =>{
+    //   Product.fetchAll()
+    //     .then(products => {
+    //       res.render('form', {
+    //         prods: products,
+    //       });
+    //     })
+    //     .catch(err => console.log(err));
+    // };
+    res.render('form');
 });
+
+app.get('/p',(req,res)=>{
+  db.query("UPDATE view SET VIEWS=VIEWS+1 WHERE id=1");
+  //console.log();
+})
 
 
 
