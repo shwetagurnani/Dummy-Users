@@ -10,7 +10,6 @@ var curMm=x.getMinutes();
 function calcY()
 {
     var set=Math.floor((Math.random()*(11-1)+1));
-    console.log(set);
     if(set>=1&&set<=4)
     return ( Math.random()*(1.40-1.00)+1.00);
     else if(set>=5&&set<=7)
@@ -20,9 +19,10 @@ function calcY()
     else
     return ( Math.random()*(2.00-1.90)+1.90);
 }
+var d,m,y,h,mn,valueY,valueX,ny,newy;
 
 var sum=0;
-var d,m,y,h,m,valueY,valueX,ny;
+
 db.query('SELECT * from data where id=1',(error,results)=>
 {
 if(error)
@@ -30,13 +30,14 @@ console.log(error);
 else
 {
       d=results[0].day;//day the dummy views last updated
+      
       m=results[0].month;//month the dummy views last updated
       y=results[0].year;//year the dummy views last updated
       h=results[0].hour;//hour
       mn=results[0].minute;//minute
       valueY=results[0].y;//value of y
       valueX=results[0].x;//value of x
-     
+      console.log(results);
      
  if(d!=curDay && curDay>d)
 {
@@ -62,40 +63,48 @@ var n1 = y*365 + d;
     ans=(n2 - n1-1); 
     if(ans<0)
     ans=0;
-   
+    
     //to find the number of minutes on te day of upload
     var MinBefore=1440-h*60-mn;
-    sum=sum+((MinBefore*valueX*valueY)/(24*60));
-    sum=Math.ceil(sum);
+    sum=sum+Math.ceil((MinBefore*valueX*valueY)/(24*60));
+   
    
     //to find the number of minutes on that particular day
     
     var MinAfter=curHr*60+curMm;
     ny=calcY();
-    var newy = ny.toFixed(2);      
    
-    sum=sum+((MinAfter*valueX*newy)/(24*60));
-    sum=Math.ceil(sum);
+    newy = ny.toFixed(2);
+    db.query('UPDATE data SET  y=? where id=1',[newy]);        
+    
+    sum=sum+Math.ceil((MinAfter*valueX*newy)/(24*60));
+   
     for(var i=1;i<=ans;i++)
     {
     var ny= calcY();
     var y=ny.toFixed(2);
-    sum=sum+(i*valueX*y);
-    sum=Math.ceil(sum);
+    sum=sum+Math.ceil((i*valueX*y));
+   
     }  
 }
 else
 { 
-    var diff=curHr*60+curMm-h*60-m;
-    sum=sum+diff*x*y;
+    var diff=curHr*60+curMm-h*60-mn;
+    sum=sum+diff*valueX*valueY;
+    newy=valueY;
 }
-      
+   
 }
-
-
-
+});
+ 
+//y=newy,day=curDay, month=curMonth,year=curYear,hour=curHr,minute=curMm
+db.query('UPDATE data SET day=?,month=?,year=?,hour=?,minute=? where id=1',[curDay,curMonth,curYear,curHr,curMm],(error,results)=>
+{
+if(error)
+{
+    console.log(error);
+}
+else
+console.log("connected");
 });
 
-
-
-//db.query('UPDATE data SET y=newy,day=curDay,month=curMonth,year=curYear,hour=curHr,minute=curMm where id=1');
