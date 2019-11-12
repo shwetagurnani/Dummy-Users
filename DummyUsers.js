@@ -7,6 +7,19 @@ var curYear=x.getFullYear();//current year
 var curHr=x.getHours();
 var curMm=x.getMinutes();
 
+function calcY()
+{
+    var set=Math.floor((Math.random()*(11-1)+1));
+    console.log(set);
+    if(set>=1&&set<=4)
+    return ( Math.random()*(1.40-1.00)+1.00);
+    else if(set>=5&&set<=7)
+    return ( Math.random()*(1.70-1.40)+1.40);
+    else if(set>=8&&set<=9)
+    return ( Math.random()*(1.90-1.70)+1.70);
+    else
+    return ( Math.random()*(2.00-1.90)+1.90);
+}
 
 var sum=0;
 var d,m,y,h,m,valueY,valueX,ny;
@@ -22,7 +35,7 @@ else
       h=results[0].hour;//hour
       mn=results[0].minute;//minute
       valueY=results[0].y;//value of y
-      valueX=results[0].x;
+      valueX=results[0].x;//value of x
      
      
  if(d!=curDay && curDay>d)
@@ -39,7 +52,7 @@ var n1 = y*365 + d;
   
     for (var i=0; i<m - 1; i++) 
         n1 =n1+ monthDays[i]; 
-  
+      
      n1 =n1+ countLeapYears(d,m,y); 
   
     var n2 = curYear*365 + curDay; 
@@ -54,30 +67,22 @@ var n1 = y*365 + d;
     var MinBefore=1440-h*60-mn;
     sum=sum+((MinBefore*valueX*valueY)/(24*60));
     sum=Math.ceil(sum);
-
+   
     //to find the number of minutes on that particular day
-    // console.log("sum is"+sum);
+    
     var MinAfter=curHr*60+curMm;
-    ny=(Math.random())+1;
+    ny=calcY();
     var newy = ny.toFixed(2);      
-    console.log(newy);
-    console.log(MinAfter);
-    console.log(valueX);
    
     sum=sum+((MinAfter*valueX*newy)/(24*60));
     sum=Math.ceil(sum);
-    // console.log("sum is"+sum);
     for(var i=1;i<=ans;i++)
     {
-    var ny= (Math.random())+1;
+    var ny= calcY();
     var y=ny.toFixed(2);
     sum=sum+(i*valueX*y);
     sum=Math.ceil(sum);
-    console.log("x is"+valueX);
-    console.log("y is"+y);
-    console.log("sum is"+sum);
-    }
-   
+    }  
 }
 else
 { 
