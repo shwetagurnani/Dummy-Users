@@ -88,7 +88,9 @@ var n1 = y*365 + d;
     
     //to find the number of minutes on te day of upload
     var MinBefore=1440-h*60-mn;
+	console.log(Math.ceil((MinBefore*valueX*valueY)/(24*60)));
     sum=sum+Math.ceil((MinBefore*valueX*valueY)/(24*60));
+	console.log(sum);
    
    
     //to find the number of minutes on that particular day
@@ -108,14 +110,15 @@ var n1 = y*365 + d;
     sum=sum+Math.ceil((i*valueX*y));
    
     }  
-    console.log(sum);
+   // console.log(sum);
 }
 else
 { 
     var diff=curHr*60+curMm-h*60-mn;
+	console.log(diff);
     sum=sum+Math.ceil(diff*valueX*valueY);
     newy=valueY;
-  //  console.log("ok",sum);
+   console.log("ok",sum);
 }
    
 }
@@ -132,6 +135,7 @@ else
 console.log("connected");
 });
 //console.log(i);
+console.log("id",r.id);
 db.query('UPDATE data SET dummyView=dummyView+? where id=?',[sum,r.id],(error,results)=>
 {
 if(error)
@@ -144,9 +148,22 @@ console.log("connected");
 });
 
 });
-res.render('form');
+
+db.query('SELECT actualView,dummyView from data' ,(error,results)=>{
+	if(error)
+		console.log(error);
+	else
+		var a=[];
+	results.forEach((r)=>{
+		a.push(r.actualView+r.dummyView);
+		
+
+	});
+	console.log(a);
+	res.render('form',{a});
 });
 
+});
 app.get('/p/:id',function(req,res)
 {
     id=req.params.id;
