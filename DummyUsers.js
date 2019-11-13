@@ -19,25 +19,26 @@ function calcY()
     else
     return ( Math.random()*(2.00-1.90)+1.90);
 }
+
+
 var d,m,y,h,mn,valueY,valueX,ny,newy;
-
 var sum=0;
-
-db.query('SELECT * from data where id=1',(error,results)=>
+db.query('SELECT * from data',(error,results)=>
 {
+   // console.log(results);
+  console.log(results[k]);
 if(error)
 console.log(error);
+
 else
 {
-      d=results[0].day;//day the dummy views last updated
-      
-      m=results[0].month;//month the dummy views last updated
-      y=results[0].year;//year the dummy views last updated
-      h=results[0].hour;//hour
-      mn=results[0].minute;//minute
-      valueY=results[0].y;//value of y
-      valueX=results[0].x;//value of x
-      console.log(results);
+      d=results[k].day;//day the dummy views last updated
+      m=results[k].month;//month the dummy views last updated
+      y=results[k].year;//year the dummy views last updated
+      h=results[k].hour;//hour
+      mn=results[k].minute;//minute
+      valueY=results[k].y;//value of y
+      valueX=results[k].x;//value of x
      
  if(d!=curDay && curDay>d)
 {
@@ -75,7 +76,7 @@ var n1 = y*365 + d;
     ny=calcY();
    
     newy = ny.toFixed(2);
-    db.query('UPDATE data SET  y=? where id=1',[newy]);        
+    db.query('UPDATE data SET  y=? where id=?',[newy,k]);        
     
     sum=sum+Math.ceil((MinAfter*valueX*newy)/(24*60));
    
@@ -96,9 +97,9 @@ else
    
 }
 });
- 
+
 //y=newy,day=curDay, month=curMonth,year=curYear,hour=curHr,minute=curMm
-db.query('UPDATE data SET day=?,month=?,year=?,hour=?,minute=? where id=1',[curDay,curMonth,curYear,curHr,curMm],(error,results)=>
+db.query('UPDATE data SET day=?,month=?,year=?,hour=?,minute=? where id=?',[curDay,curMonth,curYear,curHr,curMm,k],(error,results)=>
 {
 if(error)
 {
@@ -107,4 +108,5 @@ if(error)
 else
 console.log("connected");
 });
+
 

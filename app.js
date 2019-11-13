@@ -40,23 +40,26 @@ function calcY()
 }
 
 var d,m,y,h,mn,valueY,valueX,ny,newy;
-var sum=0,k=0;
+var sum=0;
 db.query('SELECT * from data',(error,results)=>
 {
-   // console.log(results);
-  //console.log(results[k]);
+    var i=0;
+    results.forEach((r)=>{
+        sum=0;
+
+  //console.log(r);
 if(error)
 console.log(error);
 
 else
 {
-      d=results[k].day;//day the dummy views last updated
-      m=results[k].month;//month the dummy views last updated
-      y=results[k].year;//year the dummy views last updated
-      h=results[k].hour;//hour
-      mn=results[k].minute;//minute
-      valueY=results[k].y;//value of y
-      valueX=results[k].x;//value of x
+      d=r.day;//day the dummy views last updated
+      m=r.month;//month the dummy views last updated
+      y=r.year;//year the dummy views last updated
+      h=r.hour;//hour
+      mn=r.minute;//minute
+      valueY=r.y;//value of y
+      valueX=r.x;//value of x
      
  if(d!=curDay && curDay>d)
 {
@@ -94,7 +97,7 @@ var n1 = y*365 + d;
     ny=calcY();
    
     newy = ny.toFixed(2);
-    db.query('UPDATE data SET  y=? where id=?',[newy,k]);        
+    db.query('UPDATE data SET  y=? where id=?',[newy,r.id]);        
     
     sum=sum+Math.ceil((MinAfter*valueX*newy)/(24*60));
    
@@ -105,19 +108,31 @@ var n1 = y*365 + d;
     sum=sum+Math.ceil((i*valueX*y));
    
     }  
+    console.log(sum);
 }
 else
 { 
     var diff=curHr*60+curMm-h*60-mn;
-    sum=sum+diff*valueX*valueY;
+    sum=sum+Math.ceil(diff*valueX*valueY);
     newy=valueY;
+  //  console.log("ok",sum);
 }
    
 }
-});
 
-//y=newy,day=curDay, month=curMonth,year=curYear,hour=curHr,minute=curMm
-db.query('UPDATE data SET day=?,month=?,year=?,hour=?,minute=? where id=?',[curDay,curMonth,curYear,curHr,curMm,k],(error,results)=>
+
+db.query('UPDATE data SET day=?,month=?,year=?,hour=?,minute=? where id=?',[curDay,curMonth,curYear,curHr,curMm,r.id],(error,results)=>
+{
+if(error)
+{
+    console.log(error);
+}
+else
+
+console.log("connected");
+});
+//console.log(i);
+db.query('UPDATE data SET dummyView=dummyView+? where id=?',[sum,r.id],(error,results)=>
 {
 if(error)
 {
@@ -126,16 +141,19 @@ if(error)
 else
 console.log("connected");
 });
-
-
-
-    res.render('form');
 });
 
-app.get('/p',function(req,res){
-  db.query("UPDATE view SET VIEWS=VIEWS+1 WHERE id=1");
+});
+res.render('form');
 });
 
+app.get('/p/:id',function(req,res)
+{
+    id=req.params.id;
+    // console.log(id);
+    // console.log(typeof(id));
+    db.query("UPDATE data SET actualView=actualView+1 WHERE id=?",[id]);
+});
 app.listen(3000);
 
 
