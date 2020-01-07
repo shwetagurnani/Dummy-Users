@@ -8,7 +8,6 @@ body {
   font-size: 28px;
   font-family: Arial, Helvetica, sans-serif;
 }
-
 .header {
   position: fixed;
   top: 0;
@@ -16,31 +15,24 @@ body {
   width: 100%;
   background-color: #f1f1f1;
 }
-
 .header h2 {
   text-align: center;
 }
-
 .progress-container {
   width: 100%;
   height: 8px;
   background: #ccc;
 }
-
 .progress-bar {
   height: 8px;
   background: #638374;
   width: 0%;
 }
-
 .content {
   padding: 100px 0;
   margin: 50px auto 0 auto;
   width: 80%;
 }
-
-
-
 body {font-family: Arial, Helvetica, sans-serif;}
 /* The Modal (background) */
 .modal {
@@ -55,9 +47,6 @@ body {font-family: Arial, Helvetica, sans-serif;}
   overflow: auto; /* Enable scroll if needed */
   background-color: rgb(0,0,0); /* Fallback color */
   background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
-
-
-
   
 }
 /* Modal Content */
@@ -67,7 +56,6 @@ body {font-family: Arial, Helvetica, sans-serif;}
   padding: 0px;
   border: 1px solid #888;
   width: 48%;
-
 }
 /* The Close Button */
 .close {
@@ -82,7 +70,6 @@ body {font-family: Arial, Helvetica, sans-serif;}
   text-decoration: none;
   cursor: pointer;
 }
-
 /*.myBtn{
   background-color: #4CAF50;
   border: none;
@@ -95,7 +82,6 @@ body {font-family: Arial, Helvetica, sans-serif;}
   margin: 4px 2px;
   cursor: pointer;
 }*/
-
 .myBtn {
   display: inline-block;
   border-radius: 4px;
@@ -110,14 +96,12 @@ body {font-family: Arial, Helvetica, sans-serif;}
   cursor: pointer;
   margin: 5px;
 }
-
 .myBtn span {
   cursor: pointer;
   display: inline-block;
   position: relative;
   transition: 0.5s;
 }
-
 .myBtn span:after {
   content: '\00bb';
   position: absolute;
@@ -126,18 +110,13 @@ body {font-family: Arial, Helvetica, sans-serif;}
   right: -20px;
   transition: 0.5s;
 }
-
 .myBtn:hover span {
   padding-right: 25px;
 }
-
 .myBtn:hover span:after {
   opacity: 1;
   right: 0;
 }
-
-
-
 .myBtn2 {
   display: inline-block;
   border-radius: 4px;
@@ -152,14 +131,12 @@ body {font-family: Arial, Helvetica, sans-serif;}
   cursor: pointer;
   margin: 5px;
 }
-
 .myBtn2 span {
   cursor: pointer;
   display: inline-block;
   position: relative;
   transition: 0.5s;
 }
-
 .myBtn2 span:after {
   content: '\00bb';
   position: absolute;
@@ -168,36 +145,17 @@ body {font-family: Arial, Helvetica, sans-serif;}
   right: -20px;
   transition: 0.5s;
 }
-
 .myBtn2:hover span {
   padding-right: 25px;
 }
-
 .myBtn2:hover span:after {
   opacity: 1;
   right: 0;
 }
-
-
 /*.myBtn2{
   color: white;
   font-size: 28px;
 }*/
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 </style>
 </head>
 <body style="background-color:#93C2AC;">
@@ -399,7 +357,6 @@ body {font-family: Arial, Helvetica, sans-serif;}
 <script>
 // When the user scrolls the page, execute myFunction 
 window.onscroll = function() {myFunction()};
-
 function myFunction() {
   var winScroll = document.body.scrollTop || document.documentElement.scrollTop;
   var height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
@@ -453,71 +410,54 @@ btn[1].onclick = function() {
   xhttp.open("GET", "http://localhost:3000/p/2", true);
   xhttp.send();
 }
-
 btn[2].onclick = function() {
     modal[2].style.display = "block";
     var xhttp = new XMLHttpRequest();
   xhttp.open("GET", "http://localhost:3000/p/3", true);
   xhttp.send();
 }
-
 btn[3].onclick = function() {
     modal[3].style.display = "block";
     var xhttp = new XMLHttpRequest();
   xhttp.open("GET", "http://localhost:3000/p/4", true);
   xhttp.send();
 }
-
 btn[4].onclick = function() {
     modal[4].style.display = "block";
     var xhttp = new XMLHttpRequest();
   xhttp.open("GET", "http://localhost:3000/p/5", true);
   xhttp.send();
 }
-
 btn[5].onclick = function() {
     modal[5].style.display = "block";
     var xhttp = new XMLHttpRequest();
   xhttp.open("GET", "http://localhost:3000/p/6", true);
   xhttp.send();
 }
-
 btn[6].onclick = function() {
     modal[6].style.display = "block";
     var xhttp = new XMLHttpRequest();
   xhttp.open("GET", "http://localhost:3000/p/7", true);
   xhttp.send();
 }
-
 btn[7].onclick = function() {
     modal[7].style.display = "block";
     var xhttp = new XMLHttpRequest();
     xhttp.open("GET", "http://localhost:3000/p/8", true);
     xhttp.send();
 }
-
 btn[8].onclick = function() {
     modal[8].style.display = "block";
     var xhttp = new XMLHttpRequest();
     xhttp.open("GET", "http://localhost:3000/p/9", true);
     xhttp.send();
 }
-
 btn[9].onclick = function() {
     modal[9].style.display = "block";
     var xhttp = new XMLHttpRequest();
     xhttp.open("GET", "http://localhost:3000/p/10", true);
     xhttp.send();
 }
-
-
-
-
-
-
-
-
-
 // When the user clicks on <span> (x), close the modal
 span[0].onclick = function() {
     modal[0].style.display = "none";
@@ -525,39 +465,30 @@ span[0].onclick = function() {
 span[1].onclick = function() {
     modal[1].style.display = "none";
 }
-
 span[2].onclick = function() {
     modal[2].style.display = "none";
 }
-
 span[3].onclick = function() {
     modal[3].style.display = "none";
 }
-
 span[4].onclick = function() {
     modal[4].style.display = "none";
 }
-
 span[5].onclick = function() {
     modal[5].style.display = "none";
 }
-
 span[6].onclick = function() {
     modal[6].style.display = "none";
 }
-
 span[7].onclick = function() {
     modal[7].style.display = "none";
 }
-
 span[8].onclick = function() {
     modal[8].style.display = "none";
 }
-
 span[9].onclick = function() {
     modal[9].style.display = "none";
 }
-
 // When the user clicks anywhere outside of the modal, close it
 window.onclick = function(event) {
     if (event.target == modal) {

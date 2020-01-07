@@ -172,5 +172,3 @@ app.get('/p/:id',function(req,res)
     db.query("UPDATE data SET actualView=actualView+1 WHERE id=?",[id]);
 });
 app.listen(3000);
-
-
